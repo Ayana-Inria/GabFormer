@@ -1,5 +1,6 @@
 # GabFormer
 
+TO BE RESTRUCTURED :wrench: AND CLEANED :bathub:
 
 ## :rice: Network Architecture
 ![](./images/GabFormer.jpg)
@@ -171,14 +172,13 @@ For your reference, I have also attached the links to original LEVIR-CD here: [`
 
 
 ## :trollface: License
-**Need to follow AYANA's License** <br>
-Code is released for non-commercial and research purposes **only**. For commercial purposes, please contact the authors.
+The code is released under the GPLv3 license. See `LICENSE` file for more details.
 
-## :full_moon_with_face: Citation
+<!-- ## :full_moon_with_face: Citation
 
 If you use this code for your research, please cite our paper:
 
-<!-- ```
+```
 @misc{bandara2022transformerbased,
       title={A Transformer-Based Siamese Network for Change Detection}, 
       author={Wele Gedara Chaminda Bandara and Vishal M. Patel},
