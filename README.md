@@ -1,6 +1,6 @@
 # GabFormer
 
-TO BE RESTRUCTURED :wrench: AND CLEANED :bathub:
+TO BE RESTRUCTURED :wrench: AND CLEANED :bathtub:
 
 ## :rice: Network Architecture
 ![](./images/GabFormer.jpg)
