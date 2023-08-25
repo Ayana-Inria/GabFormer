@@ -20,7 +20,7 @@ conda activate GabFormer
 Clone this repo:
 
 ```shell
-git clone https://github.com/PriscillaPio/GabFormer
+git clone https://github.com/Ayana-Inria/GabFormer.git
 cd GabFormer
 ```
 
