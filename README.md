@@ -172,7 +172,7 @@ For your reference, I have also attached the links to original LEVIR-CD here: [`
 
 
 ## :trollface: License
-The code is released under the GPLv3 license. See `LICENSE` file for more details.
+The code is released under the GPL-3.0-only license. See `LICENSE` file for more details.
 
 <!-- ## :full_moon_with_face: Citation
 
