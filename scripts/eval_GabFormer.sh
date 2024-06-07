@@ -2,12 +2,12 @@
 
 gpus=0
 
-data_name=LEVIR
-net_G=ChangeFormerV6 #This is the best version
+data_name=LEVIR  # Choices: LEVIR, WHU (set the path in data_config.py)
+net_G=GabFormer
 split=test
-vis_root=/home/priscilla/Codes/ChangeFormer/vis
-project_name=CD_LEVIR_gfn_v2_ChangeFormerV6_LEVIR_b8_lr0.0001_adamw_train_val_300_linear_ce_multi_train_True_multi_infer_False_shuffle_AB_False_embed_dim_256
-checkpoints_root=/home/priscilla/Codes/ChangeFormer/checkpoints
+vis_root=/home/Codes/GabFormer/vis
+project_name=CD_GabFormer_LEVIR_b8_lr0.0001_adamw_train_val_300_linear_ce_multi_train_True_multi_infer_False_shuffle_AB_False_embed_dim_256
+checkpoints_root=/home/Codes/GabFormer/checkpoints
 checkpoint_name=ep151.pt
 img_size=256
 embed_dim=256 #Make sure to change the embedding dim (best and default = 256)

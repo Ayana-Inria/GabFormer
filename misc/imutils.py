@@ -18,8 +18,6 @@ def cv_rotate(image, angle, borderValue):
 
     # grab the rotation matrix (applying the negative of the
     # angle to rotate clockwise), then grab the sine and cosine
-    # (i.e., the rotation components of the matrix)
-    # -angle位置参数为角度参数负值表示顺时针旋转; 1.0位置参数scale是调整尺寸比例（图像缩放参数），建议0.75
     M = cv2.getRotationMatrix2D((cX, cY), -angle, 1.0)
     cos = np.abs(M[0, 0])
     sin = np.abs(M[0, 1])
@@ -67,7 +65,7 @@ def pil_rotate(img, degree, default_value):
         # set img padding == default_value
         img2 = img.convert('RGBA')
         rot = img2.rotate(degree, expand=1)
-        fff = Image.new('RGBA', rot.size, values)  # 灰色
+        fff = Image.new('RGBA', rot.size, values)
         out = Image.composite(rot, fff, rot)
         img = out.convert(img.mode)
 
@@ -110,9 +108,6 @@ def random_resize_long(img, min_long, max_long):
 
 
 def random_scale_list(img_list, scale_range, order):
-    """
-        输入：图像列表
-    """
     target_scale = scale_range[0] + random.random() * (scale_range[1] - scale_range[0])
 
     if isinstance(img_list, tuple):
@@ -388,7 +383,7 @@ def im2arr(img_path, mode=1, dtype=np.uint8):
         arr = tifffile.imread(img_path)
         if arr.ndim == 3:
             a, b, c = arr.shape
-            if a < b and a < c:  # 当arr为C*H*W时，需要交换通道顺序
+            if a < b and a < c:
                 arr = arr.transpose([1,2,0])
     # print('shape: ', arr.shape, 'dytpe: ',arr.dtype)
     return arr

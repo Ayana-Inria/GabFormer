@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-
 import utils
 from models.networks import *
 
@@ -14,9 +13,7 @@ import models.losses as losses
 from models.losses import get_alpha, softmax_helper, FocalLoss, mIoULoss, mmIoULoss
 
 from misc.logger_tool import Logger, Timer
-
 from utils import de_norm
-
 from tqdm import tqdm
 
 class CDTrainer():

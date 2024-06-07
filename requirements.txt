@@ -25,6 +25,7 @@ cuda-runtime=11.7.1=0
 cycler=0.11.0=pyhd3eb1b0_0
 dbus=1.13.18=hb2f20db_0
 dominate=2.7.0=pypi_0
+dropblock=0.3.0=pypi_0
 einops=0.6.0=pypi_0
 expat=2.4.9=h6a678d5_0
 ffmpeg=4.3=hf484d3e_0

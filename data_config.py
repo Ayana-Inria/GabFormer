@@ -7,23 +7,10 @@ class DataConfig:
         self.data_name = data_name
         if data_name == 'LEVIR':
             self.label_transform = "norm"
-            self.root_dir = '/home/priscilla/Dataset/S2Looking/All'
-        elif data_name == 'DSIFN':
-            self.label_transform = "norm"
-            self.root_dir = '/media/lidan/ssd2/CDData/DSIFN_256/'
+            self.root_dir = '/home/Dataset/LEVIR/All'
         elif data_name == 'WHU':
             self.label_transform = "norm"
-            self.root_dir = '/media/lidan/ssd2/CDData/WHU-CD-256/'
-        elif data_name == 'CDD':
-            self.label_transform = "norm"
-            self.root_dir = '/media/lidan/ssd2/CDData/CDD-CD-256/'
-        elif data_name == 'TYPO':
-            self.label_transform = "norm"
-            self.root_dir = '/media/lidan/ssd2/CDData/TYPO/'
-        elif data_name == 'quick_start_LEVIR':
-            self.root_dir = './samples_LEVIR/'
-        elif data_name == 'quick_start_DSIFN':
-            self.root_dir = './samples_DSIFN/'
+            self.root_dir = '/home/Dataset/WHU/All'
         else:
             raise TypeError('%s has not defined' % data_name)
         return self

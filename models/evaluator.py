@@ -78,20 +78,7 @@ class CDEvaluator():
                     pretrained[key.replace('module.','')] = pretrained[key]
                     del pretrained[key]
             self.net_G.load_state_dict(pretrained)
-            # self.net_G.load_state_dict(checkpoint['model_G_state_dict'])
             
-            # print('Model state dict')
-
-            # vis = []
-            # count = 14
-            # for param in list(pretrained):
-            #     print(param)
-            #     vis.append(pretrained[param])
-            #     count -= 1
-            #     if count == 0: exit
-
-            # for v in vis:
-            #     print(vis)
 
             self.net_G.to(self.device)
 
@@ -134,19 +121,6 @@ class CDEvaluator():
             message = 'Is_training: %s. [%d,%d],  running_mf1: %.5f\n' %\
                       (self.is_training, self.batch_id, m, running_acc)
             self.logger.write(message)
-
-        # if np.mod(self.batch_id, 100) == 1:
-        #     vis_input = utils.make_numpy_grid(de_norm(self.batch['A']))
-        #     vis_input2 = utils.make_numpy_grid(de_norm(self.batch['B']))
-
-        #     vis_pred = utils.make_numpy_grid(self._visualize_pred())
-
-        #     vis_gt = utils.make_numpy_grid(self.batch['L'])
-        #     vis = np.concatenate([vis_input, vis_input2, vis_pred, vis_gt], axis=0)
-        #     vis = np.clip(vis, a_min=0.0, a_max=1.0)
-        #     file_name = os.path.join(
-        #         self.vis_dir, 'eval_' + str(self.batch_id)+'.jpg')
-        #     plt.imsave(file_name, vis)
 
         vis_input = utils.make_numpy_grid(de_norm(self.batch['A']))
         vis_input2 = utils.make_numpy_grid(de_norm(self.batch['B']))

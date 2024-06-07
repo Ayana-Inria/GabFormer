@@ -13,11 +13,8 @@ from typing import Iterable, Set, Tuple
 
 __all__ = ['cls_accuracy']
 
-
-
 def visualize_imgs(*imgs):
     """
-    可视化图像，ndarray格式的图像
     :param imgs: ndarray：H*W*C, C=1/3
     :return:
     """
@@ -43,10 +40,6 @@ def minmax(tensor):
     return min_, max_
 
 def norm_tensor(tensor,min_=None,max_=None, mode='minmax'):
-    """
-    输入：N*C*H*W / C*H*W / H*W
-    输出：在H*W维度的归一化的与原始等大的图
-    """
     assert tensor.ndim >= 2
     shape = tensor.shape
     tensor = tensor.view([*shape[:-2], shape[-1]*shape[-2]])
@@ -83,34 +76,8 @@ def norm_tensor(tensor,min_=None,max_=None, mode='minmax'):
     tensor = torch.clamp(tensor, 0, 1)
     return tensor.view(shape)
 
-    # if tensor.ndim == 4:
-    #     B, C, H, W = tensor.shape
-    #     tensor = tensor.view([B, C, -1])
-    #     min_, _ = tensor.min(-1, keepdim=True)
-    #     max_, _ = tensor.max(-1, keepdim=True)
-    #     tensor = (tensor - min_) / (max_ - min_ + 0.00000000001)
-    #     return tensor.view(B, C, H, W)
-    # elif tensor.ndim == 3:
-    #     C, H, W = tensor.shape
-    #     tensor = tensor.view([C, -1])
-    #     min_, _ = tensor.min(-1, keepdim=True)
-    #     max_, _ = tensor.max(-1, keepdim=True)
-    #     tensor = (tensor - min_) / (max_ - min_ + 0.00000000001)
-    #     return tensor.view(C, H, W)
-    # elif tensor.ndim == 2:
-    #     H, W = tensor.shape
-    #     tensor = tensor.view([-1])
-    #     min_, _ = tensor.min(-1, keepdim=True)
-    #     max_, _ = tensor.max(-1, keepdim=True)
-    #     tensor = (tensor - min_) / (max_ - min_ + 0.00000000001)
-    #     return tensor.view(H, W)
-    # else:
-    #     raise NotImplementedError
 
 def visulize_features(features, normalize=False):
-    """
-    可视化特征图，各维度make grid到一起
-    """
     from torchvision.utils import make_grid
     assert features.ndim == 4
     b,c,h,w = features.shape
@@ -122,7 +89,6 @@ def visulize_features(features, normalize=False):
 
 def visualize_tensors(*tensors):
     """
-    可视化tensor，支持单通道特征或3通道图像
     :param tensors: tensor: C*H*W, C=1/3
     :return:
     """
@@ -164,17 +130,12 @@ def np_to_tensor(image):
 
 
 def seed_torch(seed=2019):
-
-    # 加入以下随机种子，数据输入，随机扩充等保持一致
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
     torch.cuda.manual_seed(seed)
-    # 加入所有随机种子后，模型更新后，中间结果还是不一样，
-    # 发现这一的现象：前两轮，的结果还是一样；随着模型更新结果会变；
-    # torch.backends.cudnn.benchmark = False
-    # torch.backends.cudnn.deterministic = True
+
 
 def simplex(t: Tensor, axis=1) -> bool:
     _sum = t.sum(axis).type(torch.float32)
@@ -248,10 +209,6 @@ def cross_entropy(input, target, weight=None, reduction='mean',ignore_index=255)
                            ignore_index=ignore_index, reduction=reduction)
 
 def balanced_cross_entropy(input, target, weight=None,ignore_index=255):
-    """
-    类别均衡的交叉熵损失，暂时只支持2类
-    TODO: 扩展到多类C>2
-    """
     if target.dim() == 4:
         target = torch.squeeze(target, dim=1)
     if input.shape[-1] != target.shape[-1]:
@@ -265,9 +222,9 @@ def balanced_cross_entropy(input, target, weight=None,ignore_index=255):
     # print(pos_num)
     # print(neg_num)
     target_pos = target.float()
-    target_pos[target_pos!=1] = ignore_index  # 忽略不为正样本的区域
+    target_pos[target_pos!=1] = ignore_index
     target_neg = target.float()
-    target_neg[target_neg!=0] = ignore_index  # 忽略不为负样本的区域
+    target_neg[target_neg!=0] = ignore_index
 
     # print('target.sum',target.sum())
 
@@ -302,8 +259,7 @@ def get_scheduler(optimizer, opt):
 
 
 def mul_cls_acc(preds, targets, topk=(1,)):
-    """计算multi-label分类的top-k准确率topk-acc，topk-error=1-topk-acc；
-    首先计算每张图的的平均准确率，再计算所有图的平均准确率
+    """
     :param pred: N * C
     :param target: N * C
     :param topk:
@@ -313,10 +269,10 @@ def mul_cls_acc(preds, targets, topk=(1,)):
         maxk = max(topk)
         bs, C = targets.shape
         _, pred = preds.topk(maxk, 1, True, True)
-        pred += 1  # pred 为类别\in [1,C]
+        pred += 1 
         # print('pred: ', pred)
         # print('targets: ', targets)
-        correct = torch.zeros([bs, maxk]).long()  # 记录预测正确label数量
+        correct = torch.zeros([bs, maxk]).long()
         if preds.device != torch.device(type='cpu'):
             correct = correct.cuda()
         for i in range(C):
@@ -326,7 +282,7 @@ def mul_cls_acc(preds, targets, topk=(1,)):
             # print('pred: ', pred)
             correct = correct + pred.eq(target.view(-1, 1).expand_as(pred)).long()
             # print('correct: ', pred.eq(target.view(-1, 1).expand_as(pred)).long())
-        n = (targets == 1).long().sum(1)  # N*1, 每张图中含有目标的数量
+        n = (targets == 1).long().sum(1)
         # print(n)
         res = []
         for k in topk:
@@ -405,32 +361,7 @@ class PolyAdamOptimizer(torch.optim.Adam):
 
         super().step(closure)
         self.global_step += 1
-#
-# from ranger import RangerQH,Ranger
-# # https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer/blob/master/ranger/rangerqh.py
-#
-# class PolyRangerOptimizer(RangerQH):
-#
-#     def __init__(self, params, lr, betas, max_step, momentum=0.9):
-#         super().__init__(params, lr, betas)
-#
-#         self.global_step = 0
-#         self.max_step = max_step
-#         self.momentum = momentum
-#
-#         self.__initial_lr = [group['lr'] for group in self.param_groups]
-#
-#
-#     def step(self, closure=None):
-#
-#         if self.global_step < self.max_step:
-#             lr_mult = (1 - self.global_step / self.max_step) ** self.momentum
-#
-#             for i in range(len(self.param_groups)):
-#                 self.param_groups[i]['lr'] = self.__initial_lr[i] * lr_mult
-#
-#         super().step(closure)
-#         self.global_step += 1
+
 
 class SGDROptimizer(torch.optim.SGD):
 
@@ -494,7 +425,7 @@ def decode_seg(label_mask, toTensor=False):
     r = label_mask % 6
     g = (label_mask % 36) // 6
     b = label_mask // 36
-    # 归一化到[0-1]
+    
     rgb[:, :, 0] = r / 6
     rgb[:, :, 1] = g / 6
     rgb[:, :, 2] = b / 6
@@ -543,7 +474,7 @@ def tensor2np(input_image, if_normalize=True):
     elif image_numpy.ndim == 3:
         C, H, W = image_numpy.shape
         image_numpy = np.transpose(image_numpy, (1, 2, 0))
-        #  如果输入为灰度图C==1，则输出array，ndim==2；
+        
         if C == 1:
             image_numpy = image_numpy[:, :, 0]
         if if_normalize and C == 3:
@@ -565,7 +496,7 @@ def save_visuals(visuals, img_dir, name, save_one=True, iter='0'):
         N = image.shape[0]
         if save_one:
             N = 1
-        # 保存各个bz的数据
+        
         for j in range(N):
             name_ = ntpath.basename(name[j])
             name_ = name_.split(".")[0]

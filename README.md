@@ -1,13 +1,20 @@
 # GabFormer
 
-TO BE RESTRUCTURED :wrench: AND CLEANED :bathtub:
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://GitHub.com/Naereen/ama)
 
-## :rice: Network Architecture
-![](./images/GabFormer.jpg)
 
+<div align="center">
+<img src="./images/GabFormer.png" width=40%>
+</div>
+
+<br>
+(to be updated)
+The official implementation of [Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing]() (ICIP 2024)
+<br>
 
 ## :rice_ball: Dependencies
-All packages are listed in `requirements.txt`.
+All dependencies are listed in `requirements.txt`.
 You can create a virtual ``conda`` environment named ``GabFormer`` with the following command:
 
 ```
@@ -40,72 +47,13 @@ After that, you can find the prediction results in `samples/predict_LEVIR`. -->
 
 
 ## :bread: Train on LEVIR-CD
-
-You can find the training script `run_ChangeFormer_LEVIR.sh` in the folder `scripts`. You can run the script file by `sh scripts/run_ChangeFormer_LEVIR.sh` in the command environment.
-
-The detailed script file `run_ChangeFormer_LEVIR.sh` is as follows:
-
-```cmd
-#!/usr/bin/env bash
-
-#GPUs
-gpus=0
-
-#Set paths
-checkpoint_root=/media/lidan/ssd2/ChangeFormer/checkpoints
-vis_root=/media/lidan/ssd2/ChangeFormer/vis
-data_name=LEVIR
-
-
-img_size=256    
-batch_size=16   
-lr=0.0001         
-max_epochs=200
-embed_dim=256
-
-net_G=ChangeFormerV6        #ChangeFormerV6 is the finalized verion
-
-lr_policy=linear
-optimizer=adamw                 #Choices: sgd (set lr to 0.01), adam, adamw
-loss=ce                         #Choices: ce, fl (Focal Loss), miou
-multi_scale_train=True
-multi_scale_infer=False
-shuffle_AB=False
-
-#Initializing from pretrained weights
-pretrain=/media/lidan/ssd2/ChangeFormer/pretrained_segformer/segformer.b2.512x512.ade.160k.pth
-
-#Train and Validation splits
-split=train         #train
-split_val=test      #test, val
-project_name=CD_${net_G}_${data_name}_b${batch_size}_lr${lr}_${optimizer}_${split}_${split_val}_${max_epochs}_${lr_policy}_${loss}_multi_train_${multi_scale_train}_multi_infer_${multi_scale_infer}_shuffle_AB_${shuffle_AB}_embed_dim_${embed_dim}
-
-CUDA_VISIBLE_DEVICES=1 python main_cd.py --img_size ${img_size} --loss ${loss} --checkpoint_root ${checkpoint_root} --vis_root ${vis_root} --lr_policy ${lr_policy} --optimizer ${optimizer} --pretrain ${pretrain} --split ${split} --split_val ${split_val} --net_G ${net_G} --multi_scale_train ${multi_scale_train} --multi_scale_infer ${multi_scale_infer} --gpu_ids ${gpus} --max_epochs ${max_epochs} --project_name ${project_name} --batch_size ${batch_size} --shuffle_AB ${shuffle_AB} --data_name ${data_name}  --lr ${lr} --embed_dim ${embed_dim}
-```
+1. Change the dataset path in `data_config.py`.
+2. Set the training parameter and model's hyperparameters in the training script `run_GabFormer.sh` in the folder `scripts`. You can run the script file by `sh scripts/run_GabFormer.sh` in the command environment.
 
 ## :ice_cream: Evaluate on LEVIR-CD
 
-You can find the evaluation script `eval_ChangeFormer_LEVIR.sh` in the folder `scripts`. You can run the script file by `sh scripts/eval_ChangeFormer_LEVIR.sh` in the command environment.
+You can find the evaluation script `eval_GabFormer.sh` in the folder `scripts`. You can run the script file by `sh scripts/eval_GabFormer.sh` in the command environment.
 
-The detailed script file `eval_ChangeFormer_LEVIR.sh` is as follows:
-
-```cmd
-#!/usr/bin/env bash
-
-gpus=0
-
-data_name=LEVIR
-net_G=ChangeFormerV6 #This is the best version
-split=test
-vis_root=/media/lidan/ssd2/ChangeFormer/vis
-project_name=CD_ChangeFormerV6_LEVIR_b16_lr0.0001_adamw_train_test_200_linear_ce_multi_train_True_multi_infer_False_shuffle_AB_False_embed_dim_256
-checkpoints_root=/media/lidan/ssd2/ChangeFormer/checkpoints
-checkpoint_name=best_ckpt.pt
-img_size=256
-embed_dim=256 #Make sure to change the embedding dim (best and default = 256)
-
-CUDA_VISIBLE_DEVICES=0 python eval_cd.py --split ${split} --net_G ${net_G} --embed_dim ${embed_dim} --img_size ${img_size} --vis_root ${vis_root} --checkpoints_root ${checkpoints_root} --checkpoint_name ${checkpoint_name} --gpu_ids ${gpus} --project_name ${project_name} --data_name ${data_name}
-```
 
 ## :lollipop: Dataset Preparation
 
@@ -154,6 +102,7 @@ data structure
 
 `list`: contains `train.txt, val.txt and test.txt`, each file records the image names (XXX.png) in the change detection dataset.
 
+(to be updated + add WHU)
 ### :coffee: Links to download processed datsets used for train/val/test
 
 You can download the processed LEVIR-CD by the DropBox through the following here:
@@ -174,23 +123,21 @@ For your reference, I have also attached the links to original LEVIR-CD here: [`
 ## :trollface: License
 The code is released under the GPL-3.0-only license. See `LICENSE` file for more details.
 
-<!-- ## :full_moon_with_face: Citation
+## :full_moon_with_face: Citation
 
-If you use this code for your research, please cite our paper:
+If you use this code for your research, please cite our paper (to be updated):
 
 ```
-@misc{bandara2022transformerbased,
-      title={A Transformer-Based Siamese Network for Change Detection}, 
-      author={Wele Gedara Chaminda Bandara and Vishal M. Patel},
-      year={2022},
-      eprint={2201.01293},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@inproceedings{GabFormer,
+      title={Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing}, 
+      author={Priscilla Indira Osa and Josiane Zerubia and Zoltan Kato},
+      year={2024},
+      
 }
-``` -->
+```
 
-##  :paw_prints: References
-Our GabFormer is implemented based on the code provided in repository below:
-
+##  :paw_prints: Acknowledgement
+Our GabFormer is implemented based on the code provided in repositories below:
 - https://github.com/wgcban/ChangeFormer
+- https://github.com/jxgu1016/Gabor_CNN_PyTorch
 

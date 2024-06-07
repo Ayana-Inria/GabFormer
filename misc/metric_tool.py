@@ -52,7 +52,6 @@ class ConfuseMatrixMeter(AverageMeter):
         self.n_class = n_class
 
     def update_cm(self, pr, gt, weight=1):
-        """获得当前混淆矩阵，并计算当前F1得分，并更新混淆矩阵"""
         val = get_confuse_matrix(num_classes=self.n_class, label_gts=gt, label_preds=pr)
         self.update(val, weight)
         current_score = cm2F1(val)
@@ -139,7 +138,6 @@ def cm2score(confusion_matrix):
 
 
 def get_confuse_matrix(num_classes, label_gts, label_preds):
-    """计算一组预测的混淆矩阵"""
     def __fast_hist(label_gt, label_pred):
         """
         Collect values for Confusion Matrix

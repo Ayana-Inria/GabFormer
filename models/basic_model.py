@@ -1,5 +1,4 @@
 import os
-
 import torch
 
 from misc.imutils import save_image
@@ -61,10 +60,6 @@ class CDEvaluator():
         self.net_G.eval()
 
     def _save_predictions(self):
-        """
-        保存模型输出结果，二分类图像
-        """
-
         preds = self._visualize_pred()
         name = self.batch['name']
         for i, pred in enumerate(preds):
