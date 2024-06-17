@@ -1,16 +1,17 @@
 # GabFormer
 
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)](https://www.python.org/)
 [![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://GitHub.com/Naereen/ama)
-
+<!-- [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) -->
 
 <div align="center">
 <img src="./images/GabFormer.png" width=40%>
 </div>
 
 <br>
-(to be updated)
-The official implementation of [Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing]() (ICIP 2024)
+<!-- (to be updated) -->
+<!-- The official implementation of [Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing]() (ICIP 2024) -->
+The official implementation of **Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing** (ICIP 2024)
 <br>
 
 ## :rice_ball: Dependencies
@@ -46,11 +47,11 @@ python demo_LEVIR.py
 After that, you can find the prediction results in `samples/predict_LEVIR`. -->
 
 
-## :bread: Train on LEVIR-CD
+## :bread: Training
 1. Change the dataset path in `data_config.py`.
 2. Set the training parameter and model's hyperparameters in the training script `run_GabFormer.sh` in the folder `scripts`. You can run the script file by `sh scripts/run_GabFormer.sh` in the command environment.
 
-## :ice_cream: Evaluate on LEVIR-CD
+## :ice_cream: Inference
 
 You can find the evaluation script `eval_GabFormer.sh` in the folder `scripts`. You can run the script file by `sh scripts/eval_GabFormer.sh` in the command environment.
 
@@ -102,7 +103,7 @@ data structure
 
 `list`: contains `train.txt, val.txt and test.txt`, each file records the image names (XXX.png) in the change detection dataset.
 
-(to be updated + add WHU)
+<!-- (to be updated + add WHU)
 ### :coffee: Links to download processed datsets used for train/val/test
 
 You can download the processed LEVIR-CD by the DropBox through the following here:
@@ -117,7 +118,7 @@ To download LEVIR-CD dataset run following command in linux-terminal:
 wget https://www.dropbox.com/s/h9jl2ygznsaeg5d/LEVIR-CD-256.zip
 ```
 
-For your reference, I have also attached the links to original LEVIR-CD here: [`LEVIR-CD`](https://justchenhao.github.io/LEVIR/).
+For your reference, I have also attached the links to original LEVIR-CD here: [`LEVIR-CD`](https://justchenhao.github.io/LEVIR/). -->
 
 
 ## :trollface: License
