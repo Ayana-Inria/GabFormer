@@ -11,15 +11,15 @@
 <br>
 <!-- (to be updated) -->
 <!-- The official implementation of [Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing]() (ICIP 2024) -->
-The official implementation of **Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing** (ICIP 2024)
+The official implementation of **Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing** (ICIP 2024) <br>
+
+[Link of the paper](https://hal.science/hal-04619245)
 <br>
 
 ## :rice_ball: Dependencies
-All dependencies are listed in `requirements.txt`.
-You can create a virtual ``conda`` environment named ``GabFormer`` with the following command:
-
+You can create an Anaconda environment named ``GabFormer`` from `environment.yml`.
 ```
-conda create -n GabFormer --file requirements.txt
+conda env create -f environment.yml
 conda activate GabFormer
 ```
 
@@ -103,23 +103,18 @@ data structure
 
 `list`: contains `train.txt, val.txt and test.txt`, each file records the image names (XXX.png) in the change detection dataset.
 
-<!-- (to be updated + add WHU)
-### :coffee: Links to download processed datsets used for train/val/test
+### :cookie: Dataset
+GabFormer was tested on two datasets for remote sensing building change detection. 
 
-You can download the processed LEVIR-CD by the DropBox through the following here:
+1. LEVIR-CD
+    * Paper: [A Spatial-Temporal Attention-Based Method and a New Dataset for Remote Sensing Image Change Detection ](https://www.mdpi.com/2072-4292/12/10/1662)
+    * Download: [Link](https://justchenhao.github.io/LEVIR/)
 
-- LEVIR-CD-256: [`click here to download`](https://www.dropbox.com/sh/lnjxpflvgjijwoj/AAAgWr3xgOjqtTWPVpbLVcfNa?dl=0)
-
-
-Since the file sizes are large, I recommed to use command line and cosider downloading the zip file as follows (in linux):
-
-To download LEVIR-CD dataset run following command in linux-terminal:
-```cmd
-wget https://www.dropbox.com/s/h9jl2ygznsaeg5d/LEVIR-CD-256.zip
-```
-
-For your reference, I have also attached the links to original LEVIR-CD here: [`LEVIR-CD`](https://justchenhao.github.io/LEVIR/). -->
-
+2. WHU-CD
+    * Paper: [Fully convolutional networks for multisource building extraction from an open aerial and satellite imagery data set](https://ieeexplore.ieee.org/document/8444434)
+    * Download: [Link](https://study.rsgis.whu.edu.cn/pages/download/)
+    
+We utilized the same cropping method as what is provided [here](https://github.com/Ayana-Inria/AYANet) to the size of 256 x 256.
 
 ## :trollface: License
 The code is released under the GPL-3.0-only license. See `LICENSE` file for more details.
