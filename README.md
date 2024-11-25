@@ -121,10 +121,10 @@ The code is released under the GPL-3.0-only license. See `LICENSE` file for more
 
 ## :full_moon_with_face: Citation
 
-If you use this code for your research, please cite our paper (to be updated):
+If you use this code for your research, please cite our paper:
 
 ```
-@INPROCEEDINGS{10647697,
+@INPROCEEDINGS{Osa_ICIP24_GabFormer,
   author={Osa, Priscilla Indira and Zerubia, Josiane and Kato, Zoltan},
   booktitle={2024 IEEE International Conference on Image Processing (ICIP)}, 
   title={Gabor Feature Network for Transformer-Based Building Change Detection Model in Remote Sensing}, 
