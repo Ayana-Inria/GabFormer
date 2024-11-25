@@ -11,9 +11,9 @@
 <br>
 <!-- (to be updated) -->
 <!-- The official implementation of [Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing]() (ICIP 2024) -->
-The official implementation of **Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing** (ICIP 2024) <br>
+The official implementation of <strong>Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing</strong> (ICIP 2024) <br>
 
-[Link of the paper](https://hal.science/hal-04619245)
+[Link of the paper](https://ieeexplore.ieee.org/document/10647697), [Link of the paper (HAL)](https://hal.science/hal-04619245)
 <br>
 
 ## :rice_ball: Dependencies
@@ -124,12 +124,16 @@ The code is released under the GPL-3.0-only license. See `LICENSE` file for more
 If you use this code for your research, please cite our paper (to be updated):
 
 ```
-@inproceedings{GabFormer,
-      title={Gabor Feature Network for Transformer-based Building Change Detection Model in Remote Sensing}, 
-      author={Priscilla Indira Osa and Josiane Zerubia and Zoltan Kato},
-      year={2024},
-      
-}
+@INPROCEEDINGS{10647697,
+  author={Osa, Priscilla Indira and Zerubia, Josiane and Kato, Zoltan},
+  booktitle={2024 IEEE International Conference on Image Processing (ICIP)}, 
+  title={Gabor Feature Network for Transformer-Based Building Change Detection Model in Remote Sensing}, 
+  year={2024},
+  volume={},
+  number={},
+  pages={2501-2507},
+  keywords={Visualization;Codes;Shape;Fuses;Convolution;Buildings;Feature extraction;Transformer;Gabor feature;building change detection;remote sensing;image analysis},
+  doi={10.1109/ICIP51287.2024.10647697}}
 ```
 
 ##  :paw_prints: Acknowledgement
